@@ -8,23 +8,29 @@ boxes.forEach(box => {
   }
  */
 
-//Enter handling
 
-//Row Switch handling
 //API handling
 //Changing Color depending on situation
 
-const boxes = document.querySelectorAll('.first-row .box')
-const box1 = document.querySelector('.fr1')
-let currentIndex = 0;
+//Declarations
+const row1 = document.querySelectorAll('.first-row .box');
+const row2 = document.querySelectorAll('.second-row .box');
+const row3 = document.querySelectorAll('.third-row .box');
+const row4 = document.querySelectorAll('.fourth-row .box');
+const row5 = document.querySelectorAll('.fifth-row .box');
+const row6 = document.querySelectorAll('.sixth-row .box');
+
+const boxes = [row1,row2,row3,row4,row5,row6]
+let currentRow = 0;
+let currentBox = 0;
 
 //Letter Handling
 function initiate(){
     document
         .addEventListener("keydown",(event)=>{
-           if(isLetter(event.key) && currentIndex < 5){
-                boxes[currentIndex].innerText = event.key.toUpperCase();
-                currentIndex++;
+           if(isLetter(event.key) && currentBox < 5){
+                boxes[currentRow][currentBox].innerText = event.key.toUpperCase();
+                currentBox++;
            }else{
 
            }
@@ -40,16 +46,29 @@ function isLetter(letter) {
 function Del(){
     document
         .addEventListener("keydown",(event)=>{
-            if(currentIndex === 0 && event.key === "Backspace"){
-                currentIndex = 0;
-
-            }else if(currentIndex <= 5 && event.key === "Backspace"){
-                currentIndex--;
-                boxes[currentIndex].innerText = null;
+            if(currentBox === 0 && event.key === "Backspace"){
+                currentBox = 0;
+            }else if(currentBox <= 5 && event.key === "Backspace"){
+                currentBox--;
+                boxes[currentRow][currentBox].innerText = null;
             };
+        });
+}
+
+//Enter handling & Row Switch handling
+function Enter(){
+    document
+        .addEventListener("keydown",(event)=>{
+            if(currentRow === 5 && currentBox === 5 && event.key === "Enter"){
+                alert('This is the end!')
+            }else if(currentBox === 5 && event.key === "Enter"){
+                currentRow ++;
+                currentBox = 0;
+            }
         });
 }
 
 
 initiate();
 Del();
+Enter();
