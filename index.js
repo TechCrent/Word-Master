@@ -1,14 +1,3 @@
- /*
-if(isLetter(event.key)){     
-boxes.forEach(box => {
-    box.innerText = event.key.toUpperCase();
-})
-}else{
-    event.preventDefault();
-  }
- */
-
-
 //API handling
 //Changing Color depending on situation
 
@@ -66,6 +55,28 @@ function Enter(){
                 currentBox = 0;
             }
         });
+}
+
+//API handling & Word Validation
+const WORD_URL = "https://words.dev-apis.com/word-of-the-day";
+const VALID_URL = "https://words.dev-apis.com/validate-word";
+async function getWord(){
+    //First API (Get) Pushing the word
+    const promise = await fetch(WORD_URL);
+    const ProcessedResponse = await promise.json();
+
+    //Second API(Post) Validating if its a word
+    const promise2 = await fetch(VALID_URL ,{
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ word: ProcessedResponse.word}),
+    });
+    const ProcessedResponse2 = await promise2.json()
+
+    //Getting True or False Statement
+    const validWord = ProcessedResponse2.validWord;
 }
 
 
