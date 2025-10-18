@@ -1,5 +1,7 @@
-//API handling
+
 //Changing Color depending on situation
+
+//Word Storage
 
 //Declarations
 const row1 = document.querySelectorAll('.first-row .box');
@@ -9,9 +11,24 @@ const row4 = document.querySelectorAll('.fourth-row .box');
 const row5 = document.querySelectorAll('.fifth-row .box');
 const row6 = document.querySelectorAll('.sixth-row .box');
 
+const WORD_URL = "https://words.dev-apis.com/word-of-the-day";
+const VALID_URL = "https://words.dev-apis.com/validate-word";
+
 const boxes = [row1,row2,row3,row4,row5,row6]
 let currentRow = 0;
 let currentBox = 0;
+
+
+//API Handling // Getting Word of the day
+async function getWord(){
+    //First API (Get) Getting word of the Day
+    const promise = await fetch(WORD_URL);
+    const ProcessedResponse = await promise.json();
+    const wordOfTheDay = ProcessedResponse.word;
+
+}
+
+
 
 //Letter Handling
 function initiate(){
@@ -57,21 +74,17 @@ function Enter(){
         });
 }
 
-//API handling & Word Validation
-const WORD_URL = "https://words.dev-apis.com/word-of-the-day";
-const VALID_URL = "https://words.dev-apis.com/validate-word";
-async function getWord(){
-    //First API (Get) Pushing the word
-    const promise = await fetch(WORD_URL);
-    const ProcessedResponse = await promise.json();
 
+
+//API Handling // Is-Word Validation
+async function validateWord(){
     //Second API(Post) Validating if its a word
     const promise2 = await fetch(VALID_URL ,{
         method: "POST",
         headers:{
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ word: ProcessedResponse.word}),
+        body: JSON.stringify(/*Guessed word should be here*/),
     });
     const ProcessedResponse2 = await promise2.json()
 
@@ -79,6 +92,7 @@ async function getWord(){
     const validWord = ProcessedResponse2.validWord;
 }
 
+//Word Validation(Word OF The Day or Not)
 
 initiate();
 Del();
