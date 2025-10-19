@@ -1,8 +1,6 @@
 
 //Changing Color depending on situation
 
-//Word Storage
-
 //Declarations
 const row1 = document.querySelectorAll('.first-row .box');
 const row2 = document.querySelectorAll('.second-row .box');
@@ -87,10 +85,6 @@ function Enter(){
 
 
                 ToF(validWord)
-                currentLetters = [];
-                currentRow ++;
-                currentBox = 0;
-
             }
         });
 }
@@ -118,6 +112,9 @@ function ToF(validWord){
         alert("Correct answer")
     }else{
         alert("Wrong word, try again.")
+        currentLetters = [];
+        currentRow ++;
+        currentBox = 0;
     }
 }
 
