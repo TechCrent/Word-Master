@@ -1,5 +1,4 @@
 
-//Changing Color depending on situation
 
 //Declarations
 const row1 = document.querySelectorAll('.first-row .box');
@@ -76,7 +75,7 @@ function Enter(){
     document
         .addEventListener("keydown",async (event)=>{
             if(currentRow === 5 && currentBox === 5 && event.key === "Enter"){
-                alert('This is the end!')
+                alert(``)
             }else if(currentBox === 5 && event.key === "Enter"){
                 guessWord = currentLetters.join("").toLowerCase();
                 console.log(guessWord);
@@ -104,18 +103,36 @@ async function validateWord(guessWord){
     const ProcessedResponse2 = await promise2.json()
     return ProcessedResponse2.validWord;
 }
-    //Getting True or False Statement
+
+//Getting True or False Statement
 function ToF(validWord){
     if(!validWord){
         alert("Not a real Word!")
     }else if(guessWord === wordOfTheDay){
-        alert("Correct answer")
+        alert("Correct Answer!")
     }else{
         alert("Wrong word, try again.")
+
         currentLetters = [];
         currentRow ++;
         currentBox = 0;
     }
+}
+
+//Changing Color depending on situation
+function wordColor(){
+    const status = false;
+    for(let i = 0; i < 5; i++){
+        //Correct Letter & Correct Position
+        if(guessWord[i] === wordOfTheDay[i]){
+            boxes[currentRow][currentBox].classList.add('green');
+            status = true;
+        //Correct Letter & Wrong Position
+        }else if(status = true, guessWord){
+        }
+    }
+
+    
 }
 
 getWord();

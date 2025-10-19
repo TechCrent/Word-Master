@@ -41,3 +41,16 @@
     width: 47px;
     font-size: 30px;
 }
+
+/*Color classes*/
+.green{
+    background-color: green;
+}
+
+.yellow{
+    background-color: yellow;
+}
+
+.gray{
+    background-color: gray;
+}
