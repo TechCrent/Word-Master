@@ -75,7 +75,7 @@ function Enter(){
     document
         .addEventListener("keydown",async (event)=>{
             if(currentRow === 5 && currentBox === 5 && event.key === "Enter"){
-                alert(``)
+                alert(`The word is ${wordOfTheDay}`)
             }else if(currentBox === 5 && event.key === "Enter"){
                 guessWord = currentLetters.join("").toLowerCase();
                 console.log(guessWord);
@@ -111,6 +111,7 @@ function ToF(validWord){
     }else if(guessWord === wordOfTheDay){
         alert("Correct Answer!")
     }else{
+        wordColor();
         alert("Wrong word, try again.")
 
         currentLetters = [];
@@ -121,17 +122,24 @@ function ToF(validWord){
 
 //Changing Color depending on situation
 function wordColor(){
-    const status = false;
+    let status = false;
     for(let i = 0; i < 5; i++){
         //Correct Letter & Correct Position
         if(guessWord[i] === wordOfTheDay[i]){
-            boxes[currentRow][currentBox].classList.add('green');
+            boxes[currentRow][i].classList.add('green');
             status = true;
         //Correct Letter & Wrong Position
-        }else if(status = true, guessWord){
+        }else if(status = false){
+            for(let j = 0; j < 5; j++){
+                if(guessWord[j] === wordOfTheDay){
+                    boxes[currentRow][i].classList.add('yellow');
+                    status = true;
+                }
+            }
+        }else{
+            boxes[currentRow][i].classList.add('gray');
         }
     }
-
     
 }
 
