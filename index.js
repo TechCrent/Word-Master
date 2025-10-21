@@ -71,21 +71,21 @@ function Del(){
 }
 
 //Enter handling & Row Switch handling
-function Enter(){
-    document
-        .addEventListener("keydown",async (event)=>{
-            if(currentRow === 5 && currentBox === 5 && event.key === "Enter"){
-                alert(`The word is ${wordOfTheDay}`)
-            }else if(currentBox === 5 && event.key === "Enter"){
-                guessWord = currentLetters.join("").toLowerCase();
-                console.log(guessWord);
+function Enter() {
+    document.addEventListener("keydown", async (event) => {
+        if (event.key === "Enter" && currentBox === 5) {
+            guessWord = currentLetters.join("").toLowerCase();
+            console.log(guessWord);
 
-                const validWord = await validateWord(guessWord);
+            const validWord = await validateWord(guessWord);
+            ToF(validWord);
 
-
-                ToF(validWord)
+            // Only reveal the word if player has used all rows and still hasn't guessed it
+            if (currentRow === 5 && guessWord !== wordOfTheDay) {
+                alert(`The word was: ${wordOfTheDay}`);
             }
-        });
+        }
+    });
 }
 
 
