@@ -121,27 +121,25 @@ function ToF(validWord){
 }
 
 //Changing Color depending on situation
-function wordColor(){
-    let status = false;
-    for(let i = 0; i < 5; i++){
-        //Correct Letter & Correct Position
-        if(guessWord[i] === wordOfTheDay[i]){
+function wordColor() {
+    for (let i = 0; i < 5; i++) {
+        const letter = guessWord[i];
+
+        // Correct Letter & Correct Position
+        if (letter === wordOfTheDay[i]) {
             boxes[currentRow][i].classList.add('green');
-            status = true;
-        //Correct Letter & Wrong Position
-        }else if(status = false){
-            for(let j = 0; j < 5; j++){
-                if(guessWord[j] === wordOfTheDay){
-                    boxes[currentRow][i].classList.add('yellow');
-                    status = true;
-                }
-            }
-        }else{
+        }
+        // Correct Letter & Wrong Position
+        else if (wordOfTheDay.includes(letter)) {
+            boxes[currentRow][i].classList.add('yellow');
+        }
+        // Incorrect Letter
+        else {
             boxes[currentRow][i].classList.add('gray');
         }
     }
-    
 }
+
 
 getWord();
 initiate();
