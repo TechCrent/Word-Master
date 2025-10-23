@@ -97,7 +97,7 @@ function Enter() {
             isProcessing = false;
 
             // Only reveal the word if player has used all rows and still hasn't guessed it
-            if (currentRow === 5 && guessWord !== wordOfTheDay) {
+            if (currentRow === 6 && guessWord !== wordOfTheDay) {
                 alert(`The word was: ${wordOfTheDay}`);
             }
         }
@@ -128,7 +128,11 @@ function ToF(validWord){
         alert("Correct Answer!")
     }else{
         wordColor();
+        if(currentRow < 5){
         alert("Wrong word, try again.")
+        }else{
+        alert("Wrong Word!")
+        };
 
         currentLetters = [];
         currentRow ++;
