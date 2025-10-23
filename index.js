@@ -1,4 +1,7 @@
 
+//Need To Fix
+//-alerts appear multiple times instead of once
+
 
 //Declarations
 const row1 = document.querySelectorAll('.first-row .box');
@@ -74,11 +77,15 @@ function Del(){
 function Enter() {
     document.addEventListener("keydown", async (event) => {
         if (event.key === "Enter" && currentBox === 5) {
+            //Show loading page
+            showLoading();
+            
             guessWord = currentLetters.join("").toLowerCase();
-            console.log(guessWord);
-
             const validWord = await validateWord(guessWord);
             ToF(validWord);
+
+            //Hide loading page
+            hideLoading();
 
             // Only reveal the word if player has used all rows and still hasn't guessed it
             if (currentRow === 5 && guessWord !== wordOfTheDay) {
@@ -140,6 +147,14 @@ function wordColor() {
     }
 }
 
+//Loading Page Function
+function showLoading(){
+    document.querySelector("loading-overlay").style.visibility = "visible";
+}
+
+function hideLoading(){
+    document.querySelector("loading-overlay").style.visibility = "hidden";
+}
 
 getWord();
 initiate();
