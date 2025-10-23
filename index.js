@@ -1,6 +1,7 @@
 
 //Need To Fix
-//-alerts appear multiple times instead of once
+//-input lock needed
+
 
 
 //Declarations
@@ -21,6 +22,8 @@ let wordOfTheDay = "";
 const boxes = [row1,row2,row3,row4,row5,row6]
 let currentRow = 0;
 let currentBox = 0;
+
+let isProcessing;
 
 
 //API Handling // Getting Word of the day
@@ -77,15 +80,21 @@ function Del(){
 function Enter() {
     document.addEventListener("keydown", async (event) => {
         if (event.key === "Enter" && currentBox === 5) {
+            //Input Lock
+            if(isProcessing) return;
+            isProcessing = true;
+
             //Show loading page
             showLoading();
             
+            //Converting letters into word & Validating
             guessWord = currentLetters.join("").toLowerCase();
             const validWord = await validateWord(guessWord);
             ToF(validWord);
 
             //Hide loading page
             hideLoading();
+            isProcessing = false;
 
             // Only reveal the word if player has used all rows and still hasn't guessed it
             if (currentRow === 5 && guessWord !== wordOfTheDay) {
@@ -149,11 +158,11 @@ function wordColor() {
 
 //Loading Page Function
 function showLoading(){
-    document.querySelector("loading-overlay").style.visibility = "visible";
+    document.querySelector(".loading-overlay").style.visibility = "visible";
 }
 
 function hideLoading(){
-    document.querySelector("loading-overlay").style.visibility = "hidden";
+    document.querySelector(".loading-overlay").style.visibility = "hidden";
 }
 
 getWord();
